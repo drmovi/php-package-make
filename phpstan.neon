@@ -9,7 +9,7 @@ parameters:
         - ../database
         - ../tests/
         - ../packages
-        - ../configs
+        - ../config
         - ../lang
         - ../routes
 
