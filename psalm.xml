@@ -15,7 +15,7 @@
         <directory name="../lang" />
         <directory name="../routes" />
         <ignoreFiles>
-            <directory name="vendor" />
+            <directory name="../vendor" />
         </ignoreFiles>
     </projectFiles>
 </psalm>
