@@ -1,0 +1,3 @@
+#!/bin/sh
+make insights-fix
+make style-fix
