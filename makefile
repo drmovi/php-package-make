@@ -38,7 +38,7 @@ install-psalm:
 	@curl -o devconf/psalm.xml https://raw.githubusercontent.com/drmovi/devconf/main/psalm.xml
 	@composer require --dev --no-interaction psalm/plugin-laravel
 	./vendor/bin/psalm-plugin enable -c ./devconf/psalm.xml psalm/plugin-laravel || true
-	./vendor/bin/psalm --set-baseline=devconf/psalm-baseline.xml
+	./vendor/bin/psalm -c ./devconf/psalm.xml --set-baseline=psalm-baseline.xml
 
 psalm:
 	./vendor/bin/psalm --config=./devconf/psalm.xml --no-cache
