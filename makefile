@@ -11,7 +11,7 @@ git-init:
 	git init -b main
 	@curl -o ./.git/hooks/pre-commit https://raw.githubusercontent.com/drmovi/devconf/main/pre-commit
 	@chmod +x ./.git/hooks/pre-commit
-	echo ".DS_Store" >> .gitignore && echo ".phpunit.result.cache" >> .gitignore
+	echo ".DS_Store" >> .gitignore && echo "/coverage" >> .gitignore
 	git add .
 	git commit -m "feat: add devconfs"
 
@@ -40,12 +40,21 @@ install-psalm:
 	./vendor/bin/psalm-plugin enable psalm/plugin-laravel || true
 	./vendor/bin/psalm --set-baseline=devconf/psalm-baseline.xml
 
+psalm:
+	./vendor/bin/psalm --config=./devconf/psalm.xml --no-cache
+
 install-php-insights:
 	@composer require --dev --no-interaction nunomaduro/phpinsights
 	@php artisan vendor:publish --provider="NunoMaduro\PhpInsights\Application\Adapters\Laravel\InsightsServiceProvider"
 
 test:
 	./vendor/bin/phpunit --configuration ./phpunit.xml
+
+test-with-clover-coverage:
+	@php -dxdebug.mode=coverage ./vendor/bin/phpunit --configuration ./phpunit.xml --coverage-clover ./coverage/clover.xml
+
+test-with-html-coverage:
+	@php -dxdebug.mode=coverage ./vendor/bin/phpunit --configuration ./phpunit.xml --coverage-html ./coverage
 
 insights:
 	@php artisan insights --no-interaction
@@ -67,3 +76,7 @@ style-fix:
 
 style-test:
 	./vendor/bin/pint --test
+
+lint: style-test phpstan psalm
+
+pipeline: lint test test-with-html-coverage
