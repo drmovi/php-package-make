@@ -79,4 +79,4 @@ style-test:
 
 lint: style-test phpstan psalm
 
-pipeline: lint test test-with-html-coverage
+pipeline: lint test test-with-clover-coverage
