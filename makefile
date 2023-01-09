@@ -1,4 +1,4 @@
-init: init-check allow-safe-plugins install-phpstan install-psalm install-php-insights install-pint install-packager git-init
+init: init-check allow-safe-plugins install-phpstan install-psalm install-php-insights install-pint install-laramicroservice git-init
 
 
 init-check:
@@ -17,7 +17,7 @@ git-init:
 
 install-phpstan:
 	@composer require --dev --no-interaction phpstan/phpstan phpstan/extension-installer nunomaduro/larastan:^2.0
-	@mkdir -p packages
+	@mkdir -p microservices
 	@mkdir -p devconf && rm -f devconf/phpstan.neon && rm -f devconf/phpstan-baseline.neon && touch devconf/phpstan.neon && touch devconf/phpstan-baseline.neon
 	@curl -o devconf/phpstan.neon https://raw.githubusercontent.com/drmovi/devconf/main/phpstan.neon
 	$(MAKE) phpstan-baseline
@@ -74,11 +74,11 @@ install-debug-bar:
 install-pint:
 	composer require --dev laravel/pint
 
-install-packager:
-	composer require --dev drmovi/larapackager
+install-laramicroservice:
+	composer require --dev drmovi/laramicroservice
 
-packager:
-	@php artisan package:scaffold
+microservice:
+	@php artisan microservice:scaffold
 
 style-fix:
 	./vendor/bin/pint
