@@ -1,5 +1,3 @@
 #!/bin/sh
-make insights-fix
-make style-fix
-make test
+make insights-fix style-fix phpstan psalm test
 git add .
