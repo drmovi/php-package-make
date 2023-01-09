@@ -1,4 +1,4 @@
-init: init-check allow-safe-plugins install-phpstan install-psalm install-php-insights install-pint git-init
+init: init-check allow-safe-plugins install-phpstan install-psalm install-php-insights install-pint install-packager git-init
 
 
 init-check:
@@ -73,6 +73,12 @@ install-debug-bar:
 
 install-pint:
 	composer require --dev laravel/pint
+
+install-packager:
+	composer require --dev drmovi/larapackager
+
+packager:
+	@php artisan package:scaffold
 
 style-fix:
 	./vendor/bin/pint
