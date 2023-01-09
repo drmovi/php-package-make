@@ -11,7 +11,7 @@ git-init:
 	git init -b main
 	@curl -o ./.git/hooks/pre-commit https://raw.githubusercontent.com/drmovi/devconf/main/pre-commit
 	@chmod +x ./.git/hooks/pre-commit
-	echo ".DS_Store" >> .gitignore && echo "/coverage" >> .gitignore
+	@echo ".DS_Store" >> .gitignore && echo "/coverage" >> .gitignore
 	git add .
 	git commit -m "feat: add devconfs"
 
