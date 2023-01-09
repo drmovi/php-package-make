@@ -2,3 +2,4 @@
 make insights-fix
 make style-fix
 make test
+git add .
