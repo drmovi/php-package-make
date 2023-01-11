@@ -80,6 +80,9 @@ install-laramicroservice:
 microservice:
 	@php artisan microservice:scaffold
 
+microservice-remove:
+	@php artisan microservice:remove
+
 style-fix:
 	./vendor/bin/pint
 
