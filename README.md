@@ -4,7 +4,7 @@ DevConf is a make file that helps you to add all necessary dev packages and init
 
 
 ## Pre-requisites
-`make` should be installed on your system.
+`make` and `composer` should be installed on your system.
 
 ## Installation
 
