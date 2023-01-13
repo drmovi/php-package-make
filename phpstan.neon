@@ -7,7 +7,7 @@ parameters:
         - ../app/
         - ../database
         - ../tests/
-        - ../packages
+        - ../microservices/
         - ../config
         - ../lang
         - ../routes
