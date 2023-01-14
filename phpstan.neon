@@ -4,10 +4,10 @@ includes:
 parameters:
 
     paths:
-        - ../app/
+        - ../app
         - ../database
-        - ../tests/
-        - ../microservices/
+        - ../tests
+        - ../microservices
         - ../config
         - ../lang
         - ../routes
