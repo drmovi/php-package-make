@@ -1,4 +1,6 @@
-init: init-check allow-safe-plugins install-phpstan install-psalm install-php-insights install-pint install-laramicroservice git-init
+
+
+init: init-check allow-safe-plugins install-phpstan install-psalm install-php-insights install-pint install-laramicroservice install-composermicroservice install-laramicroboundaries git-init
 
 
 init-check:
@@ -25,9 +27,11 @@ install-phpstan:
 allow-safe-plugins:
 	@composer config --no-plugins allow-plugins.phpstan/extension-installer true
 	@composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+	@composer config --no-plugins allow-plugins.drmovi/composermicroservice true
 
 phpstan:
-	./vendor/bin/phpstan analyse --memory-limit=2G --configuration=devconf/phpstan.neon
+	./vendor/bin/phpstan analyse --memory-limit=2G --configuration=devconf/phpstan.neon --debug
+	./vendor/bin/phpstan clear-result-cache
 
 phpstan-baseline:
 	./vendor/bin/phpstan analyse --memory-limit=2G --configuration=devconf/phpstan.neon --allow-empty-baseline --generate-baseline=devconf/phpstan-baseline.neon
@@ -77,11 +81,16 @@ install-pint:
 install-laramicroservice:
 	composer require --dev drmovi/laramicroservice
 
+install-composermicroservice:
+	composer require --dev drmovi/composermicroservice
 microservice:
 	@php artisan microservice:scaffold
 
 microservice-remove:
 	@php artisan microservice:remove
+
+install-laramicroboundaries:
+	@composer require --dev drmovi/laramicroboundaries
 
 style-fix:
 	./vendor/bin/pint
