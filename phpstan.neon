@@ -4,14 +4,8 @@ includes:
 parameters:
 
     paths:
-        - ../app
-        - ../database
-        - ../tests
-        - ../microservices
-        - ../config
-        - ../lang
-        - ../routes
-
+         - ../microservices
+	 
     # Level 9 is the highest level
     level: 5
 
