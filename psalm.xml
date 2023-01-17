@@ -7,13 +7,7 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
     <projectFiles>
-        <directory name="../app" />
-        <directory name="../tests" />
         <directory name="../microservices" />
-        <directory name="../config" />
-        <directory name="../database" />
-        <directory name="../lang" />
-        <directory name="../routes" />
         <ignoreFiles>
             <directory name="../vendor" />
         </ignoreFiles>
