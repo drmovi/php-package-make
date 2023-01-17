@@ -1,6 +1,6 @@
 
 
-init: init-check allow-safe-plugins install-phpstan install-psalm install-php-insights install-pint install-laramicroservice install-composermicroservice install-laramicroboundaries prepare-laravel git-init
+init: init-check allow-safe-plugins install-laramicroservice install-composermicroservice install-laramicroboundries install-phpstan install-psalm install-php-insights install-pint  prepare-laravel git-init
 
 
 init-check:
@@ -20,8 +20,6 @@ git-init:
 	git commit -m "initial commit"
 	@curl -o ./.git/hooks/pre-commit https://raw.githubusercontent.com/drmovi/devconf/main/pre-commit
 	@chmod +x ./.git/hooks/pre-commit
-	@git add .
-	@git commit -m "add pre-commit hook"
 
 install-phpstan:
 	@composer require --dev --no-interaction phpstan/phpstan phpstan/extension-installer nunomaduro/larastan:^2.0
@@ -95,8 +93,8 @@ microservice:
 microservice-remove:
 	@php artisan microservice:remove
 
-install-laramicroboundaries:
-	@composer require --dev drmovi/laramicroboundaries
+install-laramicroboundries:
+	@composer require --dev drmovi/laramicroboundries
 
 style-fix:
 	./vendor/bin/pint
