@@ -1,6 +1,6 @@
 
 
-init: init-check allow-safe-plugins install-phpstan install-psalm install-php-insights install-pint install-laramicroservice install-composermicroservice install-laramicroboundaries git-init
+init: init-check allow-safe-plugins install-phpstan install-psalm install-php-insights install-pint install-laramicroservice install-composermicroservice install-laramicroboundaries prepare-laravel git-init
 
 
 init-check:
@@ -9,13 +9,19 @@ ifneq ($(force) , yes)
 	@if [ -d "./devconf" ]; then echo "devconf directory already exists, Remove it first" ; exit 1; fi
 endif
 
+prepare-laravel:
+	@rm -rf ./database/migrations/*
+	@touch ./database/migrations/.gitkeep
+
 git-init:
 	git init -b main
-	@curl -o ./.git/hooks/pre-commit https://raw.githubusercontent.com/drmovi/devconf/main/pre-commit
-	@chmod +x ./.git/hooks/pre-commit
 	@echo ".DS_Store" >> .gitignore && echo "/coverage" >> .gitignore
 	git add .
-	git commit -m "feat: add devconfs"
+	git commit -m "initial commit"
+	@curl -o ./.git/hooks/pre-commit https://raw.githubusercontent.com/drmovi/devconf/main/pre-commit
+	@chmod +x ./.git/hooks/pre-commit
+	@git add .
+	@git commit -m "add pre-commit hook"
 
 install-phpstan:
 	@composer require --dev --no-interaction phpstan/phpstan phpstan/extension-installer nunomaduro/larastan:^2.0
