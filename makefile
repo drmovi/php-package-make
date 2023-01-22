@@ -105,3 +105,8 @@ style-test:
 lint: style-test phpstan psalm
 
 pipeline: lint test test-with-clover-coverage
+
+validate-composer:
+	@composer validate
+	
+
