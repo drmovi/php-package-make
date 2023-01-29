@@ -1,10 +1,7 @@
 #!/bin/bash
 
-DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-
 # shellcheck source=./frameworks/laravel
-source "$DIR/frameworks/laravel"
+source "$PWD/frameworks/laravel"
 
 framework_select() {
     PS3='Please select framework to install: '
