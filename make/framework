@@ -4,7 +4,7 @@
 source "$PWD/frameworks/laravel"
 
 framework_select() {
-    echo "Please select framework to install: "
+    echo 'Please select framework to install: '
     PS3='Please enter your choice: '
     local options=("Laravel" "Quit")
     select opt in "${options[@]}"; do
