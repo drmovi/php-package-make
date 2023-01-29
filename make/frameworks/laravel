@@ -5,7 +5,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 
 # shellcheck source=./../configs
-source "$DIR/configs"
+. "$DIR/../configs"
 
 laravel_make() {
     composer create-project laravel/laravel "$APP_PATH"
