@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# shellcheck source=./../configs
+source "$(dirname "$0")/configs"
+
+laravel_make() {
+    composer create-project laravel/laravel "$APP_PATH"
+    composer config extra.monorepo.framework laravel
+    rm -rf ./"$APP_PATH"/database/migrations/*
+    touch ./"$APP_PATH"/database/migrations/.gitkeep
+    composer config repositories.framework path ./"$APP_PATH"
+    composer require laravel/laravel
+}
+
+laravel_install_phpstan() {
+    composer require --dev --no-interaction phpstan/phpstan phpstan/extension-installer nunomaduro/larastan:^2.0
+}
+
+laravel_install_psalm() {
+    composer require --dev --no-interaction psalm/plugin-laravel
+    ./vendor/bin/psalm-plugin enable psalm/plugin-laravel
+}
+
+laravel_install_php_insights() {
+    php "$DEV_CONF_PATH"/artisan vendor:publish --provider="NunoMaduro\PhpInsights\Application\Adapters\Laravel\InsightsServiceProvider"
+}
+
+laravel_install_style_checker_fixer() {
+    composer require --dev laravel/pint
+}
+
+laravel_style_check() {
+    ./vendor/bin/pint --test
+}
+
+laravel_style_fix() {
+    ./vendor/bin/pint
+}

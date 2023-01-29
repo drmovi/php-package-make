@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# shellcheck source=./configs
+source "$(dirname "$0")/configs"
+
+# shellcheck source=./framework
+source "$(dirname "$0")/framework"
+
+init() {
+    install_make_submodule
+    composer_init
+    framework_select
+    mode_select
+    add_composer_safe_plugin
+    install_php_microservice_generator_package
+    install_composer_microservice_plugin
+    install_phpstan_microservice_boundaries_plugin
+    install_phpstan_package
+    install_psalm_package
+    install_style_checker_fixer
+    install_php_insights
+    git_commit
+}
+
+install_make_submodule(){
+    git init -b "$MAIN_BRANCH"
+    git submodule add https://github.com/drmovi/php-microservice-make "$MAKE_PATH"
+}
+
+composer_init() {
+    composer init --name=drmovi/microservie --description="microservice monorepo" --author="Mostafa Darwish" --type=monorepo --stability=dev --license=MIT--no-interaction
+}
+
+git_commit() {
+    echo ".DS_Store" >>.gitignore && echo "/coverage" >>.gitignore
+    git add .
+    git commit -m "initial commit"
+    cat $(dirname "$0")/pre-commit >./.git/hooks/pre-commit
+    chmod +x ./.git/hooks/pre-commit
+}
+
+add_composer_safe_plugin() {
+    composer config --no-plugins allow-plugins.phpstan/extension-installer true
+    composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+    composer config --no-plugins allow-plugins.drmovi/composer-microservice true
+}
+
+install_php_microservice_generator_package() {
+    composer require --dev drmovi/php-microservice-generator
+}
+
+install_composer_microservice_plugin() {
+    composer require --dev drmovi/composer-microservice-plugin
+}
+
+install_phpstan_microservice_boundaries_plugin() {
+    composer require --dev drmovi/phpstan-microservice-boundaries-plugin
+}
+
+install_phpstan_package() {
+    framework_install_phpstan
+    mkdir -p microservices
+    mkdir -p "$DEV_CONF_PATH" && rm -f "$DEV_CONF_PATH"/phpstan.neon && rm -f "$DEV_CONF_PATH"/phpstan-baseline.neon && touch "$DEV_CONF_PATH"/phpstan-baseline.neon
+    cp $(dirname "$0")/conf/phpstan.neon "$DEV_CONF_PATH"/phpstan.neon
+}
+
+install_psalm_package() {
+    composer require --dev --no-interaction vimeo/psalm
+    mkdir -p devconf && rm -f "$DEV_CONF_PATH"/psalm.xml && touch "$DEV_CONF_PATH"/psalm.xml
+    cp $(dirname "$0")/conf/psalm.xml "$DEV_CONF_PATH"/psalm.xml
+    framework_install_psalm
+    ./vendor/bin/psalm -c ./"$DEV_CONF_PATH"/psalm.xml --set-baseline=psalm-baseline.xml || true
+}
+
+install_style_checker_fixer() {
+    framework_install_style_checker_fixer
+}
+
+mode_select() {
+    echo "Please select monorepo mode:"
+    PS3='Please enter your choice: '
+    local options=("Microservice")
+    select opt in "${options[@]}"; do
+        case $opt in
+        "Microservice")
+            _set_mode "microservice"
+            break
+            ;;
+        "Quit")
+            return
+            ;;
+        *) echo invalid option ;;
+        esac
+    done
+
+}
+
+install_php_insights() {
+    composer require --dev --no-interaction nunomaduro/phpinsights
+}
+
+_set_mode() {
+    composer config extra.monorepo.mode "$1"
+}

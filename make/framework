@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# shellcheck source=./frameworks/laravel
+source "$(dirname "$0")/frameworks/laravel"
+
+framework_select() {
+    echo "Please select framework to install:"
+    PS3='Please enter your choice: '
+    local options=("Laravel" "Quit")
+    select opt in "${options[@]}"; do
+        case $opt in
+        "Laravel")
+            laravel_make
+            break
+            ;;
+        "Quit")
+            return
+            ;;
+        *) echo invalid option ;;
+        esac
+    done
+}
+
+framework_install_phpstan() {
+    $"$(composer config extra.monorepo.framework)_install_phpstan"
+}
+
+framework_install_psalm() {
+    $"$(composer config extra.monorepo.framework)_install_psalm"
+}
+
+framework_install_style_checker_fixer() {
+    $"$(composer config extra.monorepo.framework)_install_style_checker_fixer"
+}

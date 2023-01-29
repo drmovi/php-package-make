@@ -12,16 +12,6 @@ DevConf is a make file that helps you to add all necessary dev packages and init
 curl -o ./makefile https://raw.githubusercontent.com/drmovi/devconf/main/makefile && make
 ```
 
-## Usage
-
-the above command will create a makefile in your project directory and run the `init` command.
-
-If you already have git initialized, you can use the following command to add all necessary dev packages and override your git pre-commit.
-
-```
-make init force=true
-```
-
 ## For run pipeline test
 
 ```
