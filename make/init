@@ -70,7 +70,7 @@ install_style_checker_fixer() {
 }
 
 mode_select() {
-  echo "Please select monorepo mode:"
+  echo 'Please select monorepo mode:'
   PS3='Please enter your choice: '
   local options=("Microservice")
   select opt in "${options[@]}"; do
