@@ -1,11 +1,13 @@
 #!/bin/bash
 
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+
 # shellcheck source=./frameworks/laravel
-source "$(dirname "$0")/frameworks/laravel"
+source "$DIR/frameworks/laravel"
 
 framework_select() {
-    echo "Please select framework to install:"
-    PS3='Please enter your choice: '
+    PS3='Please select framework to install: '
     local options=("Laravel" "Quit")
     select opt in "${options[@]}"; do
         case $opt in

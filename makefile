@@ -2,8 +2,8 @@
 init:
 	git init -b main
 	git submodule add https://github.com/drmovi/php-microservice-make make
-	git pull --recurse-submodules
-	. ./make/init  && init
+	git submodule update --init --recursive
+	. ./make/make/init  && init
 
 phpstan:
 	./vendor/bin/phpstan analyse --memory-limit=2G --configuration=devconf/phpstan.neon --debug
