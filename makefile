@@ -1,7 +1,7 @@
 
 init:
 	git init -b main
-	git submodule add https://github.com/drmovi/php-microservice-make make
+	git submodule add --force https://github.com/drmovi/php-microservice-make make --force
 	git submodule update --init --recursive
 	. ./make/make/init  && init
 

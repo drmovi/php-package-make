@@ -25,7 +25,7 @@ init() {
 }
 
 composer_init() {
-  composer init --name=drmovi/microservie --description="microservice monorepo" --author="Mostafa Darwish" --type=monorepo --stability=dev --license=MIT--no-interaction
+  composer init --name=drmovi/microservie --description="microservice monorepo" --author="Mostafa Darwish" --type=monorepo --stability=dev --license=MIT --no-interaction
 }
 
 git_commit() {
