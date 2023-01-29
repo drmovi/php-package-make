@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FRAMEWORK_DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$DIR" ]]; then FRAMEWORK_DIR="$PWD"; fi
+if [[ ! -d "$FRAMEWORK_DIR" ]]; then FRAMEWORK_DIR="$PWD"; fi
 
 # shellcheck source=./frameworks/laravel
 source "$FRAMEWORK_DIR/frameworks/laravel"
