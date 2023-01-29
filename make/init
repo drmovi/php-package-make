@@ -14,12 +14,12 @@ init() {
   framework_select
   mode_select
   add_composer_safe_plugin
-  install_php_microservice_generator_package
-  install_composer_microservice_plugin
-  install_phpstan_microservice_boundaries_plugin
   install_phpstan_package
   install_psalm_package
   install_style_checker_fixer
+#  install_php_microservice_generator_package
+#  install_composer_microservice_plugin
+#  install_phpstan_microservice_boundaries_plugin
   git_commit
 }
 
