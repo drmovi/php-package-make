@@ -17,7 +17,6 @@ init() {
   install_phpstan_package
   install_psalm_package
   install_style_checker_fixer
-  install_php_insights
   git_commit
 }
 
@@ -89,9 +88,6 @@ mode_select() {
 
 }
 
-install_php_insights() {
-  composer require --dev --no-interaction nunomaduro/phpinsights
-}
 
 _set_mode() {
   composer config extra.monorepo.mode "$1"
