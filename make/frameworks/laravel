@@ -8,7 +8,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 . "$DIR/../configs"
 
 laravel_make() {
-    composer create-project laravel/laravel "$APP_PATH"
+    composer create-project --no-install  laravel/laravel "$APP_PATH"
     composer config extra.monorepo.framework laravel
     rm -rf ./"$APP_PATH"/database/migrations/*
     touch ./"$APP_PATH"/database/migrations/.gitkeep

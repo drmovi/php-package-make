@@ -39,7 +39,7 @@ git_commit() {
 add_composer_safe_plugin() {
   composer config --no-plugins allow-plugins.phpstan/extension-installer true
   composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
-  composer config --no-plugins allow-plugins.drmovi/composer-microservice true
+  composer config --no-plugins allow-plugins.drmovi/composer-microservice-plugin true
 }
 
 install_php_microservice_generator_package() {
