@@ -1,10 +1,13 @@
 #!/bin/bash
 
+INIT_DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then INIT_DIR="$PWD"; fi
+
 # shellcheck source=./configs
-source "$PWD/configs"
+source "$INIT_DIR/configs"
 
 # shellcheck source=./framework
-source "$PWD/framework"
+source "$INIT_DIR/framework"
 
 init() {
   composer_init
@@ -25,10 +28,10 @@ composer_init() {
 }
 
 git_commit() {
-  cp "$PWD"/git/.gitignore ./.gitignore
+  cp "$INIT_DIR"/git/.gitignore ./.gitignore
   git add .
   git commit -m "initial commit"
-  cat "$PWD"/pre-commit >./.git/hooks/pre-commit
+  cat "$INIT_DIR"/git/pre-commit >./.git/hooks/pre-commit
   chmod +x ./.git/hooks/pre-commit
 }
 
@@ -54,13 +57,13 @@ install_phpstan_package() {
   framework_install_phpstan
   mkdir -p microservices
   mkdir -p "$DEV_CONF_PATH" && rm -f "$DEV_CONF_PATH"/phpstan.neon && rm -f "$DEV_CONF_PATH"/phpstan-baseline.neon && touch "$DEV_CONF_PATH"/phpstan-baseline.neon
-  cp "$PWD"/conf/phpstan.neon "$DEV_CONF_PATH"/phpstan.neon
+  cp "$INIT_DIR"/conf/phpstan.neon "$DEV_CONF_PATH"/phpstan.neon
 }
 
 install_psalm_package() {
   composer require --dev --no-interaction vimeo/psalm
   mkdir -p devconf && rm -f "$DEV_CONF_PATH"/psalm.xml && touch "$DEV_CONF_PATH"/psalm.xml
-  cp "$PWD"/conf/psalm.xml "$DEV_CONF_PATH"/psalm.xml
+  cp "$INIT_DIR"/conf/psalm.xml "$DEV_CONF_PATH"/psalm.xml
   framework_install_psalm
   ./vendor/bin/psalm -c ./"$DEV_CONF_PATH"/psalm.xml --set-baseline=psalm-baseline.xml || true
 }

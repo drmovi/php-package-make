@@ -1,7 +1,10 @@
 #!/bin/bash
 
+LARAVEL_DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then LARAVEL_DIR="$PWD"; fi
+
 # shellcheck source=./../configs
-. "$PWD/../configs"
+. "$LARAVEL_DIR/../configs"
 
 laravel_make() {
     composer create-project --no-install --no-scripts  laravel/laravel "$APP_PATH"
