@@ -1,5 +1,8 @@
 
 init:
+	git init -b main
+	git submodule add https://github.com/drmovi/php-microservice-make make
+	git pull --recurse-submodules
 	. ./make/init  && init
 
 phpstan:

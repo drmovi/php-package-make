@@ -7,7 +7,6 @@ source "$(dirname "$0")/configs"
 source "$(dirname "$0")/framework"
 
 init() {
-    install_make_submodule
     composer_init
     framework_select
     mode_select
@@ -20,11 +19,6 @@ init() {
     install_style_checker_fixer
     install_php_insights
     git_commit
-}
-
-install_make_submodule(){
-    git init -b "$MAIN_BRANCH"
-    git submodule add https://github.com/drmovi/php-microservice-make "$MAKE_PATH"
 }
 
 composer_init() {
