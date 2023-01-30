@@ -67,9 +67,8 @@ install_psalm_package() {
   composer require --dev --with-all-dependencies --no-interaction vimeo/psalm
   mkdir -p devconf && rm -f "$DEV_CONF_PATH"/psalm.xml
   cp "$INIT_DIR"/conf/psalm.xml "$DEV_CONF_PATH"/psalm.xml
-  cp "$INIT_DIR"/conf/psalm-baseline.xml "$DEV_CONF_PATH"/psalm-baseline.xml
   framework_install_psalm
-  psalm_baseline || true
+  ./vendor/bin/psalm --config=./"$DEV_CONF_PATH"/psalm.xml --set-baseline=psalm-baseline.xml --no-cache
 }
 
 install_style_checker_fixer() {
@@ -129,14 +128,13 @@ test_with_html_coverage() {
   php -dxdebug.mode=coverage ./vendor/bin/phpunit --configuration ./phpunit.xml --coverage-html ./coverage
 }
 
-style_fix(){
+style_fix() {
   framework_style_fix
 }
 
-style_check(){
+style_check() {
   framework_style_check
 }
-
 
 _set_mode() {
   composer config extra.monorepo.mode "$1"
