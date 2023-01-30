@@ -17,7 +17,7 @@ init() {
   install_phpstan_package
   install_psalm_package
   install_style_checker_fixer
-  #  install_php_microservice_generator_package
+  install_php_package_generator
   #  install_composer_microservice_plugin
   #  install_phpstan_microservice_boundaries_plugin
   install_php_unit
@@ -42,8 +42,8 @@ add_composer_safe_plugin() {
   composer config --no-plugins allow-plugins.drmovi/composer-microservice-plugin true
 }
 
-install_php_microservice_generator_package() {
-  composer require --dev --with-all-dependencies drmovi/php-microservice-generator
+install_php_package_generator() {
+  composer require --dev --with-all-dependencies drmovi/php-package-generator
 }
 
 install_composer_microservice_plugin() {

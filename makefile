@@ -26,10 +26,10 @@ test-with-clover-coverage:
 test-with-html-coverage:
 	. ./make/init  && test_with_html_coverage
 
-microservice:
+package:
 	@php artisan microservice:scaffold
 
-remove-microservice:
+remove-package:
 	@php artisan microservice:remove
 
 style-fix:

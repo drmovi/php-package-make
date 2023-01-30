@@ -9,7 +9,7 @@ DevConf is a make file that helps you to add all necessary dev packages and init
 ## Installation
 
 ```
-curl -o ./makefile https://raw.githubusercontent.com/drmovi/devconf/main/makefile && make
+curl -o ./makefile https://raw.githubusercontent.com/drmovi/php-package-make/main/makefile && make
 ```
 
 ## For run pipeline test
