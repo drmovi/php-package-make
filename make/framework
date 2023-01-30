@@ -17,7 +17,7 @@ framework_select() {
             break
             ;;
         "Quit")
-            return
+            exit 0
             ;;
         *) echo invalid option ;;
         esac
