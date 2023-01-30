@@ -7,35 +7,37 @@ if [[ ! -d "$LARAVEL_DIR" ]]; then LARAVEL_DIR="$PWD"; fi
 . "$LARAVEL_DIR/../configs"
 
 laravel_make() {
-    composer create-project --no-install --no-scripts  laravel/laravel "$APP_PATH"
-    composer config extra.monorepo.framework laravel
-    rm -rf ./"$APP_PATH"/database/migrations/*
-    touch ./"$APP_PATH"/database/migrations/.gitkeep
-    composer config repositories.app path ./"$APP_PATH"
-    composer require --with-all-dependencies laravel/laravel orchestra/testbench
+  composer create-project --no-install --no-scripts laravel/laravel "$APP_PATH"
+  composer config extra.monorepo.framework laravel
+  rm -rf ./"$APP_PATH"/database/migrations/*
+  touch ./"$APP_PATH"/database/migrations/.gitkeep
+  composer config repositories.app path ./"$APP_PATH"
+  composer require --with-all-dependencies laravel/laravel
 }
 
 laravel_install_phpstan() {
-    composer require --dev --with-all-dependencies --no-interaction nunomaduro/larastan:^2.0
+  #  composer require --dev --with-all-dependencies --no-interaction nunomaduro/larastan:^2.0
+  return 0
 }
 
 laravel_install_psalm() {
-    composer require --dev --with-all-dependencies --no-interaction psalm/plugin-laravel
-    ./vendor/bin/psalm-plugin enable -c "$PWD"/"$DEV_CONF_PATH"/psalm.xml psalm/plugin-laravel
+  #    composer require --dev --with-all-dependencies --no-interaction psalm/plugin-laravel
+  #    ./vendor/bin/psalm-plugin enable -c "$PWD"/"$DEV_CONF_PATH"/psalm.xml psalm/plugin-laravel
+  return 0
 }
 
 laravel_install_php_insights() {
-    php "$DEV_CONF_PATH"/artisan vendor:publish --provider="NunoMaduro\PhpInsights\Application\Adapters\Laravel\InsightsServiceProvider"
+  php "$DEV_CONF_PATH"/artisan vendor:publish --provider="NunoMaduro\PhpInsights\Application\Adapters\Laravel\InsightsServiceProvider"
 }
 
 laravel_install_style_checker_fixer() {
-    composer require --with-all-dependencies --dev laravel/pint
+  composer require --with-all-dependencies --dev laravel/pint
 }
 
 laravel_style_check() {
-    ./vendor/bin/pint --test
+  ./vendor/bin/pint --test
 }
 
 laravel_style_fix() {
-    ./vendor/bin/pint
+  ./vendor/bin/pint
 }
