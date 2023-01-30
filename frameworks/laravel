@@ -12,11 +12,11 @@ laravel_make() {
     rm -rf ./"$APP_PATH"/database/migrations/*
     touch ./"$APP_PATH"/database/migrations/.gitkeep
     composer config repositories.app path ./"$APP_PATH"
-    composer require --with-all-dependencies laravel/laravel
+    composer require --with-all-dependencies laravel/laravel orchestra/testbench
 }
 
 laravel_install_phpstan() {
-    composer require --dev --with-all-dependencies --no-interaction phpstan/phpstan phpstan/extension-installer nunomaduro/larastan:^2.0
+    composer require --dev --with-all-dependencies --no-interaction nunomaduro/larastan:^2.0
 }
 
 laravel_install_psalm() {
