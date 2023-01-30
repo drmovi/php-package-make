@@ -6,26 +6,25 @@ init:
 	. ./make/init  && init
 
 phpstan:
-	./vendor/bin/phpstan analyse --memory-limit=2G --configuration=devconf/phpstan.neon --debug
-	./vendor/bin/phpstan clear-result-cache
+	. ./make/init  && phpstan
 
 phpstan-baseline:
-	./vendor/bin/phpstan analyse --memory-limit=2G --configuration=devconf/phpstan.neon --allow-empty-baseline --generate-baseline=devconf/phpstan-baseline.neon
+	. ./make/init  && phpstan_baseline
 
 psalm:
-	./vendor/bin/psalm --config=./devconf/psalm.xml --update-baseline --set-baseline=psalm-baseline.xml --no-cache
+	. ./make/init  && psalm
 
 psalm-baseline:
-	./vendor/bin/psalm --config=./devconf/psalm.xml --update-baseline=psalm-baseline.xml --no-cache
+	. ./make/init  && psalm_baseline
 
 test:
-	./vendor/bin/phpunit --configuration ./phpunit.xml
+	. ./make/init  && test
 
 test-with-clover-coverage:
-	@php -dxdebug.mode=coverage ./vendor/bin/phpunit --configuration ./phpunit.xml --coverage-clover ./coverage/clover.xml
+	. ./make/init  && test_with_clover_coverage
 
 test-with-html-coverage:
-	@php -dxdebug.mode=coverage ./vendor/bin/phpunit --configuration ./phpunit.xml --coverage-html ./coverage
+	. ./make/init  && test_with_html_coverage
 
 microservice:
 	@php artisan microservice:scaffold
@@ -34,10 +33,10 @@ remove-microservice:
 	@php artisan microservice:remove
 
 style-fix:
-	./vendor/bin/pint
+	. ./make/init  && style_fix
 
-style-test:
-	./vendor/bin/pint --test
+style-check:
+	. ./make/init  && style_check
 
 lint: style-test phpstan psalm
 

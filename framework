@@ -35,3 +35,11 @@ framework_install_psalm() {
 framework_install_style_checker_fixer() {
     $"$(composer config extra.monorepo.framework)_install_style_checker_fixer"
 }
+
+framework_style_fix() {
+    $"$(composer config extra.monorepo.framework)_style_fix"
+}
+
+framework_style_check() {
+    $"$(composer config extra.monorepo.framework)_style_check"
+}
