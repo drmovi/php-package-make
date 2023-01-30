@@ -42,15 +42,15 @@ add_composer_safe_plugin() {
 }
 
 install_php_microservice_generator_package() {
-  composer require --dev drmovi/php-microservice-generator
+  composer require --dev --with-all-dependencies drmovi/php-microservice-generator
 }
 
 install_composer_microservice_plugin() {
-  composer require --dev drmovi/composer-microservice-plugin
+  composer require --dev --with-all-dependencies drmovi/composer-microservice-plugin
 }
 
 install_phpstan_microservice_boundaries_plugin() {
-  composer require --dev drmovi/phpstan-microservice-boundaries-plugin
+  composer require --dev --with-all-dependencies drmovi/phpstan-microservice-boundaries-plugin
 }
 
 install_phpstan_package() {
@@ -61,7 +61,7 @@ install_phpstan_package() {
 }
 
 install_psalm_package() {
-  composer require --dev --no-interaction vimeo/psalm
+  composer require --dev --with-all-dependencies --no-interaction vimeo/psalm
   mkdir -p devconf && rm -f "$DEV_CONF_PATH"/psalm.xml && touch "$DEV_CONF_PATH"/psalm.xml
   cp "$INIT_DIR"/conf/psalm.xml "$DEV_CONF_PATH"/psalm.xml
   framework_install_psalm

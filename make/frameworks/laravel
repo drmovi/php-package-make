@@ -12,16 +12,16 @@ laravel_make() {
     rm -rf ./"$APP_PATH"/database/migrations/*
     touch ./"$APP_PATH"/database/migrations/.gitkeep
     composer config repositories.framework path ./"$APP_PATH"
-    composer require laravel/laravel
+    composer require --with-all-dependencies laravel/laravel
 }
 
 laravel_install_phpstan() {
-    composer require --dev --no-interaction phpstan/phpstan phpstan/extension-installer nunomaduro/larastan:^2.0
+    composer require --dev --with-all-dependencies --no-interaction phpstan/phpstan phpstan/extension-installer nunomaduro/larastan:^2.0
 }
 
 laravel_install_psalm() {
-    composer require --dev --no-interaction psalm/plugin-laravel
-    ./vendor/bin/psalm-plugin enable psalm/plugin-laravel
+    composer require --dev --with-all-dependencies --no-interaction psalm/plugin-laravel
+    ./vendor/bin/psalm-plugin enable -c "$PWD"/"$DEV_CONF_PATH"/psalm.xml psalm/plugin-laravel
 }
 
 laravel_install_php_insights() {
@@ -29,7 +29,7 @@ laravel_install_php_insights() {
 }
 
 laravel_install_style_checker_fixer() {
-    composer require --dev laravel/pint
+    composer require --with-all-dependencies --dev laravel/pint
 }
 
 laravel_style_check() {
