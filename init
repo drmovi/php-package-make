@@ -17,9 +17,10 @@ init() {
   install_phpstan_package
   install_psalm_package
   install_style_checker_fixer
-#  install_php_microservice_generator_package
-#  install_composer_microservice_plugin
-#  install_phpstan_microservice_boundaries_plugin
+  #  install_php_microservice_generator_package
+  #  install_composer_microservice_plugin
+  #  install_phpstan_microservice_boundaries_plugin
+  install_php_unit
   git_commit
 }
 
@@ -72,6 +73,11 @@ install_style_checker_fixer() {
   framework_install_style_checker_fixer
 }
 
+install_php_unit() {
+  composer require --dev --with-all-dependencies --no-interaction phpunit/phpunit
+  cp "$INIT_DIR"/conf/phpunit.xml ./
+}
+
 mode_select() {
   echo 'Please select monorepo mode:'
   PS3='Please enter your choice: '
@@ -90,7 +96,6 @@ mode_select() {
   done
 
 }
-
 
 _set_mode() {
   composer config extra.monorepo.mode "$1"

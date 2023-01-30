@@ -4,6 +4,7 @@ includes:
 parameters:
 
     paths:
+         - ../app
          - ../microservices
 
     # Level 9 is the highest level

@@ -8,6 +8,7 @@
     errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
+        <directory name="../app"/>
         <directory name="../microservices"/>
         <ignoreFiles>
             <directory name="../vendor"/>

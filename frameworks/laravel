@@ -11,7 +11,7 @@ laravel_make() {
     composer config extra.monorepo.framework laravel
     rm -rf ./"$APP_PATH"/database/migrations/*
     touch ./"$APP_PATH"/database/migrations/.gitkeep
-    composer config repositories.framework path ./"$APP_PATH"
+    composer config repositories.app path ./"$APP_PATH"
     composer require --with-all-dependencies laravel/laravel
 }
 
