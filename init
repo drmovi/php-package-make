@@ -12,7 +12,7 @@ source "$INIT_DIR/framework"
 init() {
   composer_init
   framework_select
-  set_packages_namespace_prefix
+  set_vendor_name
   mode_select
   set_configs
   add_composer_safe_plugin
@@ -83,7 +83,7 @@ install_php_unit() {
 }
 
 mode_select() {
-  echo 'Please select monorepo mode:'
+  echo 'Select monorepo mode:'
   PS3='Please enter your choice: '
   local options=("Microservice")
   select opt in "${options[@]}"; do
@@ -142,15 +142,15 @@ set_configs() {
   composer config extra.monorepo.app_path "$APP_PATH"
 }
 
-set_packages_namespace_prefix() {
-  echo "Please enter packages name prefix: (name will be used as namespace prefix and for composer package name prefix as well)"
-  read -r name_prefix
+set_vendor_name() {
+  echo "Enter vendor name: (name will be used as namespace prefix and for composer package name prefix as well)"
+  read -r vendor_name
   local regex='^[a-z_]+$'
-  if [[ $name_prefix =~ $regex ]]; then
-    composer config extra.monorepo.name_prefix "$name_prefix"
+  if [[ $vendor_name =~ $regex ]]; then
+    composer config extra.monorepo.vendor_name "$vendor_name"
   else
     echo "Invalid name prefix. it should match the regex: $regex"
-    set_packages_namespace_prefix
+    set_vendor_name
   fi
 }
 
