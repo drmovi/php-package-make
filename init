@@ -147,7 +147,7 @@ set_packages_namespace_prefix() {
   read -r name_prefix
   local regex='^[a-z_]{1,}$'
   if [[ $name_prefix =~ $regex ]]; then
-    composer config extra.monorepo.namespace_prefix "$name_prefix"
+    composer config extra.monorepo.name_prefix "$name_prefix"
   else
     echo "Invalid name prefix. it should match the regex: $regex"
     set_packages_namespace_prefix
