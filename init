@@ -145,7 +145,7 @@ set_configs() {
 set_packages_namespace_prefix() {
   echo "Please enter packages name prefix: (name will be used as namespace prefix and for composer package name prefix as well)"
   read -r name_prefix
-  local regex='^[a-z_]{1,}$'
+  local regex='^[a-z_]+$'
   if [[ $name_prefix =~ $regex ]]; then
     composer config extra.monorepo.name_prefix "$name_prefix"
   else
