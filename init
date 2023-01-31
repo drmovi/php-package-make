@@ -12,7 +12,9 @@ source "$INIT_DIR/framework"
 init() {
   composer_init
   framework_select
+  set_packages_namespace_prefix
   mode_select
+  set_configs
   add_composer_safe_plugin
   install_phpstan_package
   install_psalm_package
@@ -96,7 +98,6 @@ mode_select() {
     *) echo invalid option ;;
     esac
   done
-
 }
 
 phpstan() {
@@ -134,6 +135,23 @@ style_fix() {
 
 style_check() {
   framework_style_check
+}
+
+set_configs() {
+  composer config extra.monorepo.package_path "$PACKAGE_PATH"
+  composer config extra.monorepo.app_path "$APP_PATH"
+}
+
+set_packages_namespace_prefix() {
+  echo "Please enter packages name prefix: (name will be used as namespace prefix and for composer package name prefix as well)"
+  read -r name_prefix
+  local regex='^[a-z_]{1,}$'
+  if [[ $name_prefix =~ $regex ]]; then
+    composer config extra.monorepo.namespace_prefix "$name_prefix"
+  else
+    echo "Invalid name prefix. it should match the regex: $regex"
+    set_packages_namespace_prefix
+  fi
 }
 
 _set_mode() {

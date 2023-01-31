@@ -4,3 +4,4 @@ APP_PATH=app
 DEV_CONF_PATH=devconf
 MAIN_BRANCH=main
 MAKE_PATH=make
+PACKAGE_PATH=packages
