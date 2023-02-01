@@ -45,7 +45,7 @@ add_composer_safe_plugin() {
 }
 
 install_php_package_generator() {
-  composer require --dev --with-all-dependencies drmovi/php-package-generator
+  composer require --dev --with-all-dependencies drmovi/package-generator
 }
 
 install_composer_microservice_plugin() {
