@@ -24,6 +24,7 @@ init() {
   #  install_phpstan_microservice_boundaries_plugin
   install_php_unit
   git_commit
+  link_vendor_to_app
 }
 
 composer_init() {
@@ -152,6 +153,10 @@ set_vendor_name() {
     echo "Invalid name prefix. it should match the regex: $regex"
     set_vendor_name
   fi
+}
+
+link_vendor_to_app() {
+  ln -s ./../vendor ./$APP_PATH
 }
 
 _set_mode() {
