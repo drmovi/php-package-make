@@ -27,10 +27,7 @@ test-with-html-coverage:
 	. ./make/init  && test_with_html_coverage
 
 package:
-	@php artisan microservice:scaffold
-
-remove-package:
-	@php artisan microservice:remove
+	./vendor/bin/dpg package:$(filter-out $@,$(MAKECMDGOALS))
 
 style-fix:
 	. ./make/init  && style_fix
