@@ -7,6 +7,11 @@ parameters:
          - ../app
          - ../packages
 
+    excludePaths:
+        - ../app/vendor
+        - ../app/bootstrap/cache
+        - ../app/storage
+
     # Level 9 is the highest level
     level: 5
 

@@ -141,6 +141,8 @@ style_check() {
 set_configs() {
   composer config extra.monorepo.package_path "$PACKAGE_PATH"
   composer config extra.monorepo.app_path "$APP_PATH"
+  composer config extra.phpstan-package-boundaries-plugin.packages_path "$PACKAGE_PATH"
+  composer config --json extra.phpstan-package-boundaries-plugin.whitelist_packages "[\"$PACKAGE_PATH\"]"
 }
 
 set_vendor_name() {
