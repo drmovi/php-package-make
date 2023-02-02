@@ -20,8 +20,8 @@ init() {
   install_psalm_package
   install_style_checker_fixer
   install_php_package_generator
+  install_phpstan_package_boundaries_plugin
   #  install_composer_microservice_plugin
-  #  install_phpstan_microservice_boundaries_plugin
   install_php_unit
   git_commit
   link_vendor_to_app
@@ -157,6 +157,10 @@ set_vendor_name() {
 
 link_vendor_to_app() {
   ln -s ./../vendor ./$APP_PATH
+}
+
+install_phpstan_package_boundaries_plugin() {
+  composer require --dev --with-all-dependencies drmovi/phpstan-package-boundaries-plugin
 }
 
 _set_mode() {
