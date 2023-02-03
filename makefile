@@ -40,3 +40,6 @@ lint: style-test phpstan psalm
 pipeline: lint test test-with-clover-coverage
 
 
+artisan:
+	. ./make/init  && artisan $(filter-out $@,$(MAKECMDGOALS))
+

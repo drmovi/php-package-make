@@ -165,6 +165,10 @@ install_phpstan_package_boundaries_plugin() {
   composer require --dev --with-all-dependencies drmovi/phpstan-package-boundaries-plugin
 }
 
+artisan() {
+  php ./$APP_PATH/artisan "$@"
+}
+
 _set_mode() {
   composer config extra.monorepo.mode "$1"
 }
